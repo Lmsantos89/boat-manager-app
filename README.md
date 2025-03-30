@@ -45,6 +45,12 @@ To run the tests, execute:
 
 ``gradle test``
 
+To generate a test coverage report with JaCoCo:
+
+``./gradlew test jacocoTestReport``<br>
+
+The test report can be found in  ``.\backend/build/reports/jacoco/html/index.html``
+
 ## Frontend Setup
 
 ### 1. Navigate to the frontend directory
