@@ -69,7 +69,7 @@ The frontend will be available at http://localhost:4200.
 
 To stop the database:
 
-docker-compose down
+``docker-compose down``
 
 To stop the frontend, press Ctrl + C in the terminal where it's running.
 To stop the backend, press Ctrl + C in its terminal as well.
