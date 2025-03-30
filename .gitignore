@@ -51,3 +51,9 @@ docker-compose.yml
 .env.development.local
 .env.test.local
 .env.production.local
+
+# Gradle
+.gradle/
+build/
+gradle-app.setting
+gradle.properties
