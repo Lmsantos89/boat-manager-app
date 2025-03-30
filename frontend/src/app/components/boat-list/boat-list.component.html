@@ -1,0 +1,77 @@
+<div
+  class="min-h-screen flex flex-col bg-gradient-to-r from-blue-500 via-indigo-600 to-purple-700"
+>
+  <div class="flex justify-between items-center py-8 px-6">
+    <div class="flex items-center">
+      <i class="fas fa-anchor text-white text-4xl mr-3 drop-shadow-md"></i>
+      <h1 class="text-5xl font-extrabold text-white drop-shadow-lg">
+        Boat Manager
+      </h1>
+    </div>
+    <button
+      (click)="logout()"
+      class="bg-red-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition duration-300 transform hover:scale-105 flex items-center shadow-md"
+    >
+      <i class="fas fa-sign-out-alt mr-2"></i> Logout
+    </button>
+  </div>
+  <div class="flex-grow flex flex-col p-4 pt-2">
+    <div
+      class="w-full max-w-4xl bg-white rounded-xl shadow-lg transform transition-all hover:shadow-xl p-6 mx-auto"
+    >
+      <div class="flex justify-between items-center mb-4">
+        <h2 class="text-2xl font-bold text-gray-800">Boat Overview</h2>
+        <button
+          (click)="addBoat()"
+          class="bg-green-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition duration-300 transform hover:scale-105 flex items-center"
+        >
+          <i class="fas fa-plus mr-2"></i> Add New Boat
+        </button>
+      </div>
+      <div class="overflow-x-auto">
+        <table class="w-full border-collapse">
+          <thead>
+            <tr class="bg-indigo-600 text-white">
+              <th class="p-4 text-left rounded-tl-lg">Name</th>
+              <th class="p-4 text-left">Description</th>
+              <th class="p-4 text-left rounded-tr-lg">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              *ngFor="let boat of boats; let i = index"
+              class="border-b hover:bg-gray-50 transition duration-200 cursor-pointer"
+              (click)="openBoatDetailsDialog(boat, $event)"
+              matTooltip="Click to see the details"
+              matTooltipPosition="left"
+            >
+              <td class="p-4">
+                <i class="fas fa-ship mr-2"></i> {{ boat.name }}
+              </td>
+              <td class="p-4 text-gray-700">{{ boat.description }}</td>
+              <td class="p-4 space-x-3">
+                <button
+                  (click)="editBoat(boat.id!, $event)"
+                  class="bg-yellow-500 text-white px-3 py-1 rounded-lg hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:ring-offset-2 transition duration-300 transform hover:scale-105"
+                >
+                  <i class="fas fa-edit"></i>
+                </button>
+                <button
+                  (click)="deleteBoat(boat.id!)"
+                  class="bg-red-600 text-white px-3 py-1 rounded-lg hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition duration-300 transform hover:scale-105"
+                >
+                  <i class="fas fa-trash"></i>
+                </button>
+              </td>
+            </tr>
+            <tr *ngIf="boats?.length === 0 || !boats" class="text-center">
+              <td colspan="3" class="p-4 text-gray-500">
+                No boats found. Add one to get started!
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
