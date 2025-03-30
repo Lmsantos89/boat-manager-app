@@ -62,6 +62,7 @@ jacocoTestReport {
 		html.required = true // Generates HTML report
 		html.outputLocation = layout.buildDirectory.dir("reports/jacoco/html").get().asFile
 	}
+	finalizedBy 'openJacocoReport'
 }
 
 jacocoTestCoverageVerification {
