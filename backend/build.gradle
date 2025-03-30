@@ -2,6 +2,7 @@ plugins {
 	id 'java'
 	id 'org.springframework.boot' version '3.4.4'
 	id 'io.spring.dependency-management' version '1.1.7'
+	id 'jacoco'
 }
 
 group = 'santos.luis'
@@ -50,4 +51,25 @@ dependencies {
 test {
 	useJUnitPlatform()
 	jvmArgs '-javaagent:' + configurations.testRuntimeClasspath.find { it.name.contains('byte-buddy-agent') }
+	finalizedBy jacocoTestReport
+}
+
+jacocoTestReport {
+	dependsOn test // Ensure tests run first
+	reports {
+		xml.required = true  // For CI tools
+		csv.required = false
+		html.required = true // Generates HTML report
+		html.outputLocation = layout.buildDirectory.dir("reports/jacoco/html").get().asFile
+	}
+}
+
+jacocoTestCoverageVerification {
+	violationRules {
+		rule {
+			limit {
+				minimum = 0.8 // Fail build if coverage < 80%
+			}
+		}
+	}
 }
