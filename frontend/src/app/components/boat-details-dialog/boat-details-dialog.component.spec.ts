@@ -22,11 +22,7 @@ describe('BoatDetailsDialogComponent', () => {
     dialogRefSpy = jasmine.createSpyObj('MatDialogRef', ['close']);
 
     await TestBed.configureTestingModule({
-      imports: [
-        MatDialogModule,
-        MatButtonModule,
-        BoatDetailsDialogComponent, // Move to imports for standalone
-      ],
+      imports: [MatDialogModule, MatButtonModule, BoatDetailsDialogComponent],
       providers: [
         { provide: MAT_DIALOG_DATA, useValue: mockBoat },
         { provide: MatDialogRef, useValue: dialogRefSpy },
@@ -66,34 +62,48 @@ describe('BoatDetailsDialogComponent', () => {
 
   it('should apply correct styles to the title', () => {
     const titleElement = fixture.debugElement.query(By.css('h2')).nativeElement;
-    const classes = titleElement.className.split(' ');
+    const classes = Array.from(titleElement.classList);
+    expect(classes).toContain('font-bold');
+    expect(classes).toContain('text-indigo-900');
+    expect(classes).toContain('tracking-wide');
     expect(classes).toContain('text-3xl');
-    expect(classes).toContain('font-extrabold');
-    expect(classes).toContain('text-indigo-800');
     expect(classes).toContain('mb-6');
-    expect(classes).toContain('tracking-tight');
+    expect(classes).toContain('bg-gradient-to-r');
+    expect(classes).toContain('from-indigo-600');
+    expect(classes).toContain('via-purple-500');
+    expect(classes).toContain('to-pink-500');
   });
 
   it('should apply correct styles to the description', () => {
-    const descriptionElement = fixture.debugElement.query(
-      By.css('mat-dialog-content p')
-    ).nativeElement;
-    const classes = descriptionElement.className.split(' ');
-    expect(classes).toContain('text-gray-700');
+    const descElement = fixture.debugElement.query(By.css('p')).nativeElement;
+    const classes = Array.from(descElement.classList);
+    expect(classes).toContain('text-gray-800');
     expect(classes).toContain('text-lg');
     expect(classes).toContain('leading-relaxed');
+    expect(classes).toContain('bg-white');
+    expect(classes).toContain('bg-opacity-75');
+    expect(classes).toContain('p-4');
+    expect(classes).toContain('rounded-lg');
+    expect(classes).toContain('border-l-4');
+    expect(classes).toContain('border-indigo-500');
   });
 
   it('should apply correct styles to the close button', () => {
     const buttonElement = fixture.debugElement.query(
       By.css('button')
     ).nativeElement;
-    const classes = buttonElement.className.split(' ');
-    expect(classes).toContain('bg-indigo-600');
-    expect(classes).toContain('text-white');
-    expect(classes).toContain('px-6');
+    const classes = Array.from(buttonElement.classList);
+    expect(classes).toContain('bg-gray-200');
+    expect(classes).toContain('text-gray-700');
+    expect(classes).toContain('px-4');
     expect(classes).toContain('py-2');
-    expect(classes).toContain('rounded-full');
-    expect(classes).toContain('hover:bg-indigo-800');
+    expect(classes).toContain('rounded-lg');
+    expect(classes).toContain('hover:bg-gray-300');
+    expect(classes).toContain('focus:ring-2');
+    expect(classes).toContain('focus:ring-gray-400');
+    expect(classes).toContain('transition');
+    expect(classes).toContain('duration-300');
+    expect(classes).toContain('transform');
+    expect(classes).toContain('hover:scale-105');
   });
 });
